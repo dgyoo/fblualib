@@ -140,7 +140,21 @@ echo 'Installing TH++'
 echo
 
 cd $dir/thpp/thpp
-./build.sh
+set -o pipefail
+if [[ ! -r ./Tensor.h ]]; then
+  echo "Please run from the thpp subdirectory." >&2
+  exit 1
+fi
+rm -rf gtest-1.7.0 gtest-1.7.0.zip
+curl -JLO https://github.com/google/googletest/archive/release-1.7.0.zip
+unzip googletest-release-1.7.0.zip
+mv googletest-release-1.7.0 gtest-1.7.0
+mkdir -p build
+cd build
+cmake ..
+make
+ctest
+sudo make install
 
 echo
 echo 'Installing FBLuaLib'
