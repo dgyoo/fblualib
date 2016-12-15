@@ -140,7 +140,6 @@ echo 'Installing TH++'
 echo
 
 cd $dir/thpp/thpp
-source ~/torch/install/bin/torch-activate
 set -o pipefail
 if [[ ! -r ./Tensor.h ]]; then
   echo "Please run from the thpp subdirectory." >&2
